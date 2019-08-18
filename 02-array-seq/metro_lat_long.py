@@ -11,3 +11,14 @@ fmt = '{:15} | {:9.4f} | {:9.4f}'
 for name, cc, pop, (latitude, longitude) in metro_areas:  # <2>
     if longitude <= 0:  # <3>
         print(fmt.format(name, latitude, longitude))
+
+from collections import namedtuple
+City = namedtuple('City', 'city latLong')
+LatLong = namedtuple('LatLong', 'lat long')
+bei_jing = City('beijing', LatLong(12, 34))
+bei_jing2 = City('beijing', LatLong(12, 34))
+
+
+print(bei_jing)
+for key, value in bei_jing._asdict().items():
+    print(key, value)
