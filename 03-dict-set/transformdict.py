@@ -140,3 +140,7 @@ class TransformDict(MutableMapping):
             equiv = list(self.items())
         return '%s(%r, %s)' % (self.__class__.__name__,
                                self._transform, repr(equiv))
+
+
+
+# python -m doctest -v transformdict.py

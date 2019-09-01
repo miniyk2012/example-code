@@ -53,3 +53,6 @@ class StrKeyDict0(dict):  # <1>
         return key in self.keys() or str(key) in self.keys()  # <6>
 
 # END STRKEYDICT0
+
+
+# python -m doctest -v strkeydict0.py

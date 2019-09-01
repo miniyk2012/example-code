@@ -50,7 +50,7 @@ Tests for update using a `dict` or a sequence of pairs::
     >>> d.update([1, 3, 5])
     Traceback (most recent call last):
       ...
-    TypeError: 'int' object is not iterable
+    TypeError: cannot unpack non-iterable int object
 
 """
 # BEGIN STRKEYDICT
@@ -59,6 +59,8 @@ import collections
 
 
 class StrKeyDict(collections.UserDict):  # <1>
+    """UserDict的源码请见: /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/collections/__init__.py
+    或：https://github.com/python/cpython/blob/9a28400aace26597b35950ac561d49c102b6daf4/Lib/collections/__init__.py#L994"""
 
     def __missing__(self, key):  # <2>
         if isinstance(key, str):
@@ -72,3 +74,6 @@ class StrKeyDict(collections.UserDict):  # <1>
         self.data[str(key)] = item   # <4>
 
 # END STRKEYDICT
+
+
+# python -m doctest -v strkeydict.py
