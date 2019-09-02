@@ -1,5 +1,6 @@
 # BEGIN DIALCODES
 # dial codes of the top 10 most populous countries
+from collections import OrderedDict
 DIAL_CODES = [
         (86, 'China'),
         (91, 'India'),
@@ -20,6 +21,7 @@ print('d2:', d2.keys())
 d3 = dict(sorted(DIAL_CODES, key=lambda x:x[1]))  # <3>
 print('d3:', d3.keys())
 assert d1 == d2 and d2 == d3  # <4>
+assert OrderedDict(d1) != OrderedDict(d2) and OrderedDict(d2) != OrderedDict(d3)
 # END DIALCODES
 """
 # BEGIN DIALCODES_OUTPUT

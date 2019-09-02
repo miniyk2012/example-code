@@ -73,3 +73,5 @@ target/
 # PyCharm
 .idea/
 .mypy_cache/
+not_selected.arr
+selected.arr
