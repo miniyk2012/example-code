@@ -21,3 +21,5 @@ import array
 numbers = array.array('h', [-2, 2])
 octets = bytes(numbers)
 print(octets)
+
+
