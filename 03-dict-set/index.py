@@ -7,7 +7,7 @@
 
 import sys
 import re
-from collections import defaultdict
+
 WORD_RE = re.compile(r'\w+')
 
 index = {}
