@@ -72,7 +72,7 @@ target/
 
 # PyCharm
 .idea/
-.mypy_cache/
-not_selected.arr
-selected.arr
-dummy
+.mypy_cache
+03-dict-set/support/not_selected.arr
+03-dict-set/support/selected.arr
+04-text-byte/dummy
