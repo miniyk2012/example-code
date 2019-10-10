@@ -32,3 +32,17 @@ assert callable(time.strftime)
 assert not callable(A().method())
 assert not callable(lambda_func(1, 2))
 assert not callable(generator_func())
+
+
+class C: pass
+
+
+obj = C()
+
+
+def func(x: str = '1'): print('a')
+
+
+func.name = "lalal"
+
+set(dir(func)) - set(dir(obj))

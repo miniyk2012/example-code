@@ -17,6 +17,7 @@
     'banana split'
 """
 
+
 # BEGIN CLIP
 
 def clip(text, max_len=80):
