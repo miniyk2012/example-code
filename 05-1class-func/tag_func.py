@@ -43,3 +43,13 @@ if __name__ == '__main__':
         bound_args = sig.bind(**my_tag)
     except TypeError as e:
         assert e.args[0] == "missing a required argument: 'name'"
+
+    print("*" * 50)
+    from functools import partial
+
+    picture = partial(tag, 'img', 'sfda', cls='pic-frame')
+    print(picture('ejf', src='wumpus.jpeg'))
+    print(picture)
+    print(picture.func)
+    print(picture.keywords)
+    print(picture.args)
