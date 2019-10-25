@@ -4,7 +4,7 @@ class Node:
 
 class UnaryOperator(Node):
     def __init__(self, operand):
-        self.operand = operand  # 操作数
+        self.operand = operand  # 操作数, 是某种Node
 
 
 class BinaryOperator(Node):
