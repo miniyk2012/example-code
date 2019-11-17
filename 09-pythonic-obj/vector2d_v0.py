@@ -26,6 +26,8 @@ A 2-dimensional vector class
 
 # END VECTOR2D_V0_DEMO
 """
+'pytest -v --doctest-modules xx.py'
+
 
 # BEGIN VECTOR2D_V0
 from array import array
@@ -40,6 +42,8 @@ class Vector2d:
         self.y = float(y)
 
     def __iter__(self):
+        # yield self.x
+        # yield self.y
         return (i for i in (self.x, self.y))  # <3>
 
     def __repr__(self):
@@ -51,7 +55,7 @@ class Vector2d:
 
     def __bytes__(self):
         return (bytes([ord(self.typecode)]) +  # <6>
-                bytes(array(self.typecode, self)))  # <7>
+                bytes(array(self.typecode, self)))  # <7> array会用到__iter__
 
     def __eq__(self, other):
         return tuple(self) == tuple(other)  # <8>
