@@ -66,3 +66,8 @@ class Vector2d:
     def __bool__(self):
         return bool(abs(self))  # <10>
 # END VECTOR2D_V0
+
+
+if __name__ == '__main__':
+    v1 = Vector2d(3, 4)
+    print(v1.__dict__)

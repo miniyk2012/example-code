@@ -159,3 +159,5 @@ class Vector2d:
 if __name__ == '__main__':
     v1 = Vector2d(3, 4)
     print(complex(v1))
+    print(v1.__dict__)
+    print(Vector2d.__dict__)
