@@ -33,8 +33,8 @@ Test of ``.frombytes()`` class method:
 
 """
 
-from array import array
 import math
+from array import array
 
 
 class Vector2d:
@@ -67,10 +67,24 @@ class Vector2d:
     def __bool__(self):
         return bool(abs(self))
 
-# BEGIN VECTOR2D_V1
+    # BEGIN VECTOR2D_V1
     @classmethod  # <1>
     def frombytes(cls, octets):  # <2>
         typecode = chr(octets[0])  # <3>
         memv = memoryview(octets[1:]).cast(typecode)  # <4>
         return cls(*memv)  # <5>
+
+    def __format__(self, format_spec):
+        vals = (format(val, format_spec) for val in self)
+        return '({}, {})'.format(*vals)
+
+
 # END VECTOR2D_V1
+
+
+if __name__ == '__main__':
+    v1 = Vector2d(3, 4)
+    print(format(v1))
+    print(format(v1, '.2f'))
+    print(format(v1, '.3e'))
+    print(format(v1, '.0f'))

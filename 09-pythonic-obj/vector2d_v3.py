@@ -21,6 +21,8 @@ A 2-dimensional vector class
     5.0
     >>> bool(v1), bool(Vector2d(0, 0))
     (True, False)
+    >>> complex(v1)
+    (3+4j)
 
 
 Test of ``.frombytes()`` class method:
@@ -149,3 +151,11 @@ class Vector2d:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(*memv)
+
+    def __complex__(self):
+        return complex(self.x, self.y)
+
+
+if __name__ == '__main__':
+    v1 = Vector2d(3, 4)
+    print(complex(v1))
