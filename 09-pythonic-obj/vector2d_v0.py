@@ -28,17 +28,16 @@ A 2-dimensional vector class
 """
 'pytest -v --doctest-modules xx.py'
 
-
+import math
 # BEGIN VECTOR2D_V0
 from array import array
-import math
 
 
 class Vector2d:
     typecode = 'd'  # <1>
 
     def __init__(self, x, y):
-        self.x = float(x)    # <2>
+        self.x = float(x)  # <2>
         self.y = float(y)
 
     def __iter__(self):
@@ -65,9 +64,14 @@ class Vector2d:
 
     def __bool__(self):
         return bool(abs(self))  # <10>
+
+
 # END VECTOR2D_V0
 
 
 if __name__ == '__main__':
     v1 = Vector2d(3, 4)
     print(v1.__dict__)
+
+    for x in v1:
+        print(x)
