@@ -236,3 +236,13 @@ class Vector:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+
+if __name__ == '__main__':
+    v = Vector(range(10))
+    print(repr(v))
+    print(repr(v[3:40]))
+    print(type(v._components[0]))
+
+    v2 = Vector([])
+    print(v2)

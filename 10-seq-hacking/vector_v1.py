@@ -89,7 +89,7 @@ import math
 
 
 class Vector:
-    typecode = 'd'
+    typecode = 'd'  # floating point
 
     def __init__(self, components):
         self._components = array(self.typecode, components)  # <1>
@@ -124,3 +124,13 @@ class Vector:
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)  # <7>
 # END VECTOR_V1
+
+
+if __name__ == '__main__':
+    v1 = Vector([3, 4.5])
+    b1 = bytes(v1)
+    v2 = Vector.frombytes(b1)
+    assert v1 == v2
+
+    for e in v1:
+        print(e)

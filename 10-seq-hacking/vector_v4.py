@@ -147,12 +147,12 @@ Most hash values of non-integers vary from a 32-bit to 64-bit CPython build::
 
 """
 
-from array import array
-import reprlib
+import functools
 import math
 import numbers
-import functools
 import operator
+import reprlib
+from array import array
 
 
 class Vector:
@@ -219,3 +219,10 @@ class Vector:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+
+if __name__ == '__main__':
+    v = Vector([])
+    print(v)
+    print(hash(v))
+    assert v == []
