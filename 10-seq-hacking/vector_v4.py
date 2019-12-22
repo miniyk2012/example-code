@@ -222,7 +222,9 @@ class Vector:
 
 
 if __name__ == '__main__':
-    v = Vector([])
+    v = Vector([1, 2])
     print(v)
     print(hash(v))
-    assert v == []
+    assert v == [1,2]
+    print(format())  # 若没定义__format__, 则返回str(v)
+    print(v.__format__(''))

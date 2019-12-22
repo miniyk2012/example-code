@@ -189,13 +189,13 @@ Tests of ``format()`` with spherical coordinates in 2D, 3D and 4D::
     '<1.00000, 1.57080, 0.00000, 0.00000>'
 """
 
-from array import array
-import reprlib
+import functools
+import itertools  # <1>
 import math
 import numbers
-import functools
 import operator
-import itertools  # <1>
+import reprlib
+from array import array
 
 
 class Vector:
@@ -258,8 +258,8 @@ class Vector:
         raise AttributeError(msg.format(cls, name))
 
     def angle(self, n):  # <2>
-        r = math.sqrt(sum(x * x for x in self[n:]))
-        a = math.atan2(r, self[n-1])
+        r = math.sqrt(sum(x * x for x in self[n:]))  # 用到了__getitem__
+        a = math.atan2(r, self[n - 1])
         if (n == len(self) - 1) and (self[-1] < 0):
             return math.pi * 2 - a
         else:
@@ -269,6 +269,10 @@ class Vector:
         return (self.angle(n) for n in range(1, len(self)))
 
     def __format__(self, fmt_spec=''):
+        brief = True
+        if fmt_spec.endswith('*'):
+            fmt_spec = fmt_spec[:-1]
+            brief = False
         if fmt_spec.endswith('h'):  # hyperspherical coordinates
             fmt_spec = fmt_spec[:-1]
             coords = itertools.chain([abs(self)],
@@ -277,7 +281,10 @@ class Vector:
         else:
             coords = self
             outer_fmt = '({})'  # <6>
+        # print(list(coords))  # [4.0, 1.0471975511965976, 0.9553166181245093, 0.7853981633974483]
         components = (format(c, fmt_spec) for c in coords)  # <7>
+        if brief:
+            return reprlib.repr(outer_fmt.format(', '.join(components)))
         return outer_fmt.format(', '.join(components))  # <8>
 
     @classmethod
@@ -285,4 +292,11 @@ class Vector:
         typecode = chr(octets[0])
         memv = memoryview(octets[1:]).cast(typecode)
         return cls(memv)
+
+
 # END VECTOR_V5
+
+
+if __name__ == '__main__':
+    print(format(Vector(range(100)), '.3eh'))
+    print(format(Vector(range(100)), '.3f'))
