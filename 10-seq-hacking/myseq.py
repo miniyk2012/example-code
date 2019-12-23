@@ -25,8 +25,7 @@ if __name__ == '__main__':
     s = 'ABCDE'
     print(s[slice(None, 10, 2)])
 
-
     myTry = MyTry(10)
     myTry2 = MyTry(10)
-    for a,b in zip(myTry, myTry2):
+    for a, b in zip(myTry, myTry2):
         print(a, b)
