@@ -26,3 +26,6 @@ class BingoCage(Tombola):  # <1>
         self.pick()
 
 # END TOMBOLA_BINGO
+
+if __name__ == '__main__':
+    print(Tombola.__subclasses__())

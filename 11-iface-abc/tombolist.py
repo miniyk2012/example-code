@@ -21,3 +21,12 @@ class TomboList(list):  # <2>
         return tuple(sorted(self))
 
 # Tombola.register(TomboList)  # <7>
+
+
+if __name__ == '__main__':
+    print(issubclass(TomboList, Tombola))
+    t = TomboList(range(100))
+    print(isinstance(t, Tombola))
+    print(TomboList.__mro__)
+    print(t.loaded())
+    print(Tombola.__subclasses__())

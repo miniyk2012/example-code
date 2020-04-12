@@ -31,4 +31,4 @@ if __name__ == '__main__':
     print(deck)
     deck.insert(3, 100)
     for c in deck:
-        print(deck)
+        print(c)
