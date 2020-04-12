@@ -13,7 +13,8 @@ TEST_MSG = '{0:16} {1.attempted:2} tests, {1.failed:2} failed - {2}'
 def main(argv):
     verbose = '-v' in argv
     real_subclasses = Tombola.__subclasses__()  # <2>
-    virtual_subclasses = list(Tombola._abc_registry)  # <3>
+    # virtual_subclasses = list(Tombola._abc_registry)  # <3>
+    virtual_subclasses = []  # <3>
 
     for cls in real_subclasses + virtual_subclasses:  # <4>
         test(cls, verbose)
