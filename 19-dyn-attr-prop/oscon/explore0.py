@@ -61,3 +61,6 @@ class FrozenJSON:
         else:  # <8>
             return obj
 # END EXPLORE0
+
+
+# python -m doctest -v explore0.py

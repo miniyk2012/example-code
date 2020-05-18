@@ -26,11 +26,11 @@ osconfeed.py: Script to download the OSCON schedule feed
 # END OSCONFEED_DEMO
 """
 
+import json
+import os
+import warnings
 # BEGIN OSCONFEED
 from urllib.request import urlopen
-import warnings
-import os
-import json
 
 URL = 'http://www.oreilly.com/pub/sc/osconfeed'
 JSON = 'data/osconfeed.json'
@@ -46,4 +46,7 @@ def load():
     with open(JSON) as fp:
         return json.load(fp)  # <3>
 
+
 # END OSCONFEED
+
+# python -m doctest -v osconfeed.py
