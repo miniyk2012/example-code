@@ -49,6 +49,7 @@ def quantity():  # <1>
     storage_name = '_{}:{}'.format('quantity', quantity.counter)  # <4>
 
     def qty_getter(instance):  # <5>
+        # print(storage_name)
         return getattr(instance, storage_name)
 
     def qty_setter(instance, value):
@@ -58,6 +59,8 @@ def quantity():  # <1>
             raise ValueError('value must be > 0')
 
     return property(qty_getter, qty_setter)
+
+
 # END LINEITEM_V4_PROP
 
 class LineItem:
@@ -71,4 +74,13 @@ class LineItem:
 
     def subtotal(self):
         return self.weight * self.price
+
+
+if __name__ == '__main__':
+    raisins = LineItem('Golden raisins', 10, 6.95)
+    raisins.weight
+    raisins.price
+    raisins.price
+    raisins.weight
+    print(LineItem.weight)
 

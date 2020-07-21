@@ -14,14 +14,16 @@
     ['diaper', (30, 20, 10), Text('desserts')]
     >>> Text.reverse.__get__(word)  # <6>
     <bound method Text.reverse of Text('forward')>
-    >>> Text.reverse.__get__(None, Text)  # <7>
-    <function Text.reverse at 0x101244e18>
+    >>> Text.reverse.__get__(None, Text)  # doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+    <function Text.reverse at 0x...>
     >>> word.reverse  # <8>
     <bound method Text.reverse of Text('forward')>
     >>> word.reverse.__self__  # <9>
     Text('forward')
     >>> word.reverse.__func__ is Text.reverse  # <10>
     True
+    >>> word.reverse.__call__()
+    Text('drawrof')
 
 # END FUNC_DESCRIPTOR_DEMO
 """
