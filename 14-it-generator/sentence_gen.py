@@ -22,4 +22,10 @@ class Sentence:
             yield word  # <2>
         return  # <3>
 
+
 # done! <4>
+
+if __name__ == '__main__':
+    s = Sentence('a b c')
+    print(list(s))  # ['a', 'b', 'c']
+    print(list(s))  # ['a', 'b', 'c']

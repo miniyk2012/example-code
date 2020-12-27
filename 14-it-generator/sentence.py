@@ -38,3 +38,9 @@ if __name__ == '__main__':
 
 
     print(isinstance(Foo(), abc.Iterable))
+
+    it = iter(s)
+    print(next(it))
+
+    it2 = iter(it)
+    print(next(it2))

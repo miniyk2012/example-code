@@ -19,3 +19,8 @@ class Sentence:
     def __iter__(self):
         for match in RE_WORD.finditer(self.text):  # <2>
             yield match.group()  # <3>
+
+
+if __name__ == '__main__':
+    s = Sentence('hello world')
+    print(list(s))

@@ -6,7 +6,7 @@ A ``Sentence`` is built from a ``str`` and allows iteration
 word-by-word.
 
 ::
-    >>> from sentence import Sentence
+    >>> from sentence_gen2 import Sentence
     >>> s = Sentence('The time has come')
     >>> s
     Sentence('The time has come')

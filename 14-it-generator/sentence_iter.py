@@ -41,7 +41,33 @@ class SentenceIterator:
 
     def __iter__(self):  # <9>
         return self
+
+
 # END SENTENCE_ITER
+class Sentence2:
+    """极其不推荐的写法, 因为只能迭代一次.
+    迭代器模式要求支持多种遍历, 同一个可迭代实例中获取多个独立的迭代器, 各个迭代器要维护自身的内部状态, 因此每次iter(my_iterable)
+    都要新建一个独立的迭代器"""
+
+    def __init__(self, text):
+        self.text = text
+        self.index = 0
+        self.words = RE_WORD.findall(text)
+
+    def __repr__(self):
+        return 'Sentence(%s)' % reprlib.repr(self.text)
+
+    def __iter__(self):  # <1>
+        return self
+
+    def __next__(self):
+        try:
+            word = self.words[self.index]
+        except IndexError:
+            raise StopIteration()
+        self.index += 1
+        return word
+
 
 def main():
     import sys
@@ -61,5 +87,9 @@ def main():
     else:
         warnings.warn('last word is #%d, "%s"' % (n, word))
 
+
 if __name__ == '__main__':
-    main()
+    s2 = Sentence2('a b c')
+    print(list(s2))  # ['a', 'b', 'c']
+    print(list(s2))  # [], Sentence2只能迭代一次, 以后不要再写这样的类
+    # main()
