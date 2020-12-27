@@ -1,9 +1,9 @@
 """
 Sentence: access words by index
 """
-
 import re
 import reprlib
+from collections import abc
 
 RE_WORD = re.compile(r'\w+')
 
@@ -22,3 +22,19 @@ class Sentence:
 
     def __repr__(self):
         return 'Sentence(%s)' % reprlib.repr(self.text)  # <4>
+
+
+if __name__ == '__main__':
+    s = Sentence("hello world")
+    for w in s:
+        print(w)
+
+    print(isinstance(s, abc.Iterable))
+
+
+    class Foo:
+        def __iter__(self):
+            pass
+
+
+    print(isinstance(Foo(), abc.Iterable))
