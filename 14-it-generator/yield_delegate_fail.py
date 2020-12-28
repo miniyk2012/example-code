@@ -14,14 +14,16 @@ Daniel Patterson, Junsong Li, Anand Chitipothu, and Shriram Krishnamurthi.
 DOI=10.1145/2544173.2509536 http://doi.acm.org/10.1145/2544173.2509536
 """
 
+import time
 # BEGIN YIELD_DELEGATE_FAIL
 def f():
     def do_yield(n):
         yield n
     x = 0
     while True:
+        time.sleep(1)
         x += 1
-        do_yield(x)
+        print(do_yield(x))
 # END YIELD_DELEGATE_FAIL
 
 if __name__ == '__main__':
