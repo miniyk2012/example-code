@@ -22,3 +22,7 @@ class ArithmeticProgression:
         while forever or result < self.end:
             yield result
             result += self.step
+
+if __name__ == '__main__':
+    ap = ArithmeticProgression(1, .5, 3)
+    print(list(ap))

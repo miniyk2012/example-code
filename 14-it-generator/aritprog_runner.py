@@ -35,3 +35,5 @@ def test(gen_factory, verbose=False):
 if __name__ == '__main__':
     import sys
     main(sys.argv)
+
+    # python aritprog_runner.py [-v]

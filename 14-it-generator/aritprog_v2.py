@@ -14,7 +14,7 @@ Arithmetic progression generator function::
     >>> from decimal import Decimal
     >>> ap = aritprog_gen(0, Decimal('.1'), .3)
     >>> list(ap)
-    [Decimal('0.0'), Decimal('0.1'), Decimal('0.2')]
+    [Decimal('0'), Decimal('0.1'), Decimal('0.2')]
 
 """
 
@@ -22,10 +22,23 @@ Arithmetic progression generator function::
 # BEGIN ARITPROG_GENFUNC
 def aritprog_gen(begin, step, end=None):
     result = type(begin + step)(begin)
-    forever = end is None
     index = 0
+    forever = end is None
     while forever or result < end:
         yield result
         index += 1
         result = begin + step * index
+
+
 # END ARITPROG_GENFUNC
+
+if __name__ == '__main__':
+    ari = aritprog_gen(0, 0.1)
+    for _ in range(10):
+        print(next(ari))
+
+    print()
+    from itertools import count
+    gen = count(1, 0.5)
+    for _ in range(10):
+        print(next(gen))
