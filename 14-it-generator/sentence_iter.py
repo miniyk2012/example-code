@@ -47,7 +47,7 @@ class SentenceIterator:
 class Sentence2:
     """极其不推荐的写法, 因为只能迭代一次.
     迭代器模式要求支持多种遍历, 同一个可迭代实例中获取多个独立的迭代器, 各个迭代器要维护自身的内部状态, 因此每次iter(my_iterable)
-    都要新建一个独立的迭代器"""
+    都要新建一个独立的迭代器, 其实这是把迭代器和可迭代对象混淆了, 这样的实现是一个迭代器, 就是SentenceIterator"""
 
     def __init__(self, text):
         self.text = text
@@ -89,7 +89,13 @@ def main():
 
 
 if __name__ == '__main__':
-    s2 = Sentence2('a b c')
+    s2 = Sentence2('a b c')  # s2本质是是个迭代器(Iterator), 因此只能迭代一次
     print(list(s2))  # ['a', 'b', 'c']
-    print(list(s2))  # [], Sentence2只能迭代一次, 以后不要再写这样的类
+    print(list(s2))  # [], s2只能迭代一次
     # main()
+
+    s1 = Sentence('a b c')  # s1是可迭代对象
+    for x in s1:
+        print(x)
+    for x in s1:
+        print(x)
