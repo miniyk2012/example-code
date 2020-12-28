@@ -21,13 +21,23 @@ class FibonacciGenerator:
         self.a = 0
         self.b = 1
 
+    def __iter__(self):
+        return self
+
     def __next__(self):
         result = self.a
         self.a, self.b = self.b, self.a + self.b
         return result
 
+
+class Fibonacci2:
     def __iter__(self):
-        return self
+        a, b = 0, 1
+        while True:
+            yield a
+            a, b = b, a + b
+
+
 # END FIBO_BY_HAND
 
 # for comparison, this is the usual implementation of a Fibonacci
@@ -43,9 +53,10 @@ def fibonacci():
 
 if __name__ == '__main__':
 
-    for x, y in zip(Fibonacci(), fibonacci()):
+    for x, y, z in zip(Fibonacci(), fibonacci(), Fibonacci2()):
         assert x == y, '%s != %s' % (x, y)
+        assert x == z, '%s != %s' % (x, z)
         print(x)
-        if x > 10**10:
+        if x > 10 ** 10:
             break
     print('etc...')
