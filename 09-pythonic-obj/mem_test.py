@@ -1,8 +1,8 @@
 import importlib
-import sys
 import resource
+import sys
 
-NUM_VECTORS = 10**7
+NUM_VECTORS = 10 ** 7
 
 if len(sys.argv) == 2:
     module_name = sys.argv[1].replace('.py', '')

@@ -1,4 +1,5 @@
 import inspect
+from collections.abc import Iterable
 from functools import wraps
 
 
@@ -84,11 +85,45 @@ def coro_exception():
     coro_avg.send(60)
 
 
+def gen():
+    yield from 'AB'
+    yield from range(1, 3)
+
+
+def chain(*iterables):
+    for ele in iterables:
+        yield from ele
+
+
+def flatten(items, ignore_types=(str, bytes)):
+    for item in items:
+        if isinstance(item, Iterable) and type(item) not in ignore_types:
+            yield from flatten(item)
+        else:
+            yield item
+
+
 if __name__ == '__main__':
     coro1_test()
     print()
     coro2_test()
     print()
     cal_average()
+    # print()
+    # coro_exception()
     print()
-    coro_exception()
+    print(list(gen()))
+    print()
+    print(list(chain('ABC', range(3))))
+
+    print()
+    items = [1, 2, [3, 4, [5, 6], 7, ['Dave', 'Paula', ['Thomas', 'Lewis']]], 8]
+    result = []
+    f = flatten(items)
+    while True:
+        try:
+            result.append(f.send(None))
+        except StopIteration:
+            break
+    print(result)
+    print(list(flatten(items)))

@@ -58,4 +58,10 @@ def demo_finally():
     finally:
         print('-> coroutine ending')
 
+
 # END EX_CORO_FINALLY
+
+if __name__ == '__main__':
+    fin_coro = demo_finally()
+    next(fin_coro)
+    fin_coro.throw(ZeroDivisionError)

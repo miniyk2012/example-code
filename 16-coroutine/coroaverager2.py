@@ -59,3 +59,15 @@ def averager():
         average = total/count
     return Result(count, average)  # <2>
 # END RETURNING_AVERAGER
+
+if __name__ == '__main__':
+    coro_avg = averager()
+    next(coro_avg)
+    print(coro_avg.send(10))
+    print(coro_avg.send(30))
+    print(coro_avg.send(6.5))
+    try:
+        coro_avg.send(None)
+    except StopIteration as exc:
+        result = exc.value
+        print(result)

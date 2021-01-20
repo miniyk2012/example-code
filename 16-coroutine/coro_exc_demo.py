@@ -48,19 +48,38 @@ Coroutine not handling exception::
 
 # END DEMO_CORO_EXC_3
 """
+import inspect
+
 
 # BEGIN EX_CORO_EXC
 class DemoException(Exception):
     """An exception type for the demonstration."""
 
+
 def demo_exc_handling():
     print('-> coroutine started')
+    val = None
     while True:
         try:
-            x = yield
+            print('before')
+            x = yield val
+            print('after')
         except DemoException:  # <1>
             print('*** DemoException handled. Continuing...')
+            val = 'exception value'
         else:  # <2>
             print('-> coroutine received: {!r}'.format(x))
     raise RuntimeError('This line should never run.')  # <3>
+
+
 # END EX_CORO_EXC
+
+if __name__ == '__main__':
+    exc_coro = demo_exc_handling()
+    next(exc_coro)
+    print('init value:', exc_coro.send(11))
+    print('init value:', exc_coro.send(22))
+    print('throw value:', exc_coro.throw(DemoException))
+    print(inspect.getgeneratorstate(exc_coro))
+    print('close value:', exc_coro.close())
+    print(inspect.getgeneratorstate(exc_coro))
