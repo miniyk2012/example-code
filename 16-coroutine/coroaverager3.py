@@ -46,10 +46,14 @@ from collections import namedtuple
 from coroutil import coroutine  # <4>
 
 Result = namedtuple('Result', 'count average')
-
+averager_total_count = 0
+group_total_count = 0
 
 # the subgenerator
 def averager():  # <1>
+    global averager_total_count
+    averager_total_count += 1
+    print('新建averager', averager_total_count)
     total = 0.0
     count = 0
     average = None
@@ -70,11 +74,15 @@ def averager():  # <1>
 
 # the delegating generator
 def grouper(results, key):  # <5>
+    global group_total_count
+    group_total_count += 1
+    print('新建group', group_total_count)
     while True:  # <6>
-        results[key] = yield from averager()  # <7>
+        a = yield from averager()  # <7>
+        results[key] = a
 
 
-# the client code, a.k.a. the caller
+    # the client code, a.k.a. the caller
 def main(data):  # <8>
     results = {}
     for key, values in data.items():
@@ -82,7 +90,11 @@ def main(data):  # <8>
         print(next(group))  # <10>  # 这个next会透过group到averager上
         for value in values:
             print(group.send(value))  # <11>
-        group.send(None)  # important! <12>
+        last = group.send(None)  # important! <12>
+        # 非常微妙的一步, result[key]被赋值后, 由于grouper的while循环, 还会新建一个averager并走到yield处停住, 然后控制权交给main函数,
+        # main函数这里直接又for循环新建group了, 原来的那个协程后续就被垃圾回收了
+        print('last:', last)
+        print()
 
     # print(results)  # uncomment to debug
     report(results)
