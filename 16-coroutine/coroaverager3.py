@@ -87,7 +87,7 @@ def main(data):  # <8>
     results = {}
     for key, values in data.items():
         group = grouper(results, key)  # <9>
-        print(next(group))  # <10>  # 这个next会透过group到averager上
+        print('预激:', next(group))  # <10>  # 这个next会透过group到averager上, 在averager的yield处暂停住
         for value in values:
             print(group.send(value))  # <11>
         last = group.send(None)  # important! <12>
